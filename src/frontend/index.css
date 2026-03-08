@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ──────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora[wght].woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1.25rem;
+
+    /* ── Jigyansa warm palette ── */
+    /* Backgrounds */
+    --background: 0.97 0.008 60;          /* warm off-white */
+    --foreground: 0.18 0.02 30;            /* deep warm brown-black */
+
+    /* Cards */
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.02 30;
+
+    /* Popover */
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.02 30;
+
+    /* Primary – coral rose */
+    --primary: 0.62 0.19 16;              /* warm coral */
+    --primary-foreground: 1 0 0;
+
+    /* Secondary – soft peach */
+    --secondary: 0.94 0.04 40;
+    --secondary-foreground: 0.35 0.05 30;
+
+    /* Muted */
+    --muted: 0.93 0.015 50;
+    --muted-foreground: 0.52 0.04 40;
+
+    /* Accent – rose blush */
+    --accent: 0.92 0.06 20;
+    --accent-foreground: 0.35 0.08 20;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Border / Input */
+    --border: 0.88 0.025 40;
+    --input: 0.88 0.025 40;
+    --ring: 0.62 0.19 16;
+
+    /* Jigyansa bubble – soft warm rose */
+    --jigyansa-bubble: 0.92 0.055 20;
+    --jigyansa-bubble-foreground: 0.22 0.04 25;
+
+    /* User bubble – vibrant coral */
+    --user-bubble: 0.62 0.19 16;
+    --user-bubble-foreground: 1 0 0;
+
+    /* Chat background */
+    --chat-bg: 0.95 0.012 55;
+
+    /* Header */
+    --header-bg: 1 0 0;
+    --header-border: 0.90 0.025 40;
+
+    /* Online indicator */
+    --online: 0.72 0.18 145;
+
+    /* Sidebar (keep defaults) */
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary: 0.205 0 0;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.97 0 0;
+    --sidebar-accent-foreground: 0.205 0 0;
+    --sidebar-border: 0.922 0 0;
+    --sidebar-ring: 0.708 0 0;
+
+    /* Charts */
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Sora", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+}
+
+/* ── Typing animation ──────────────────────────────────── */
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%            { transform: translateY(-6px); opacity: 1; }
+}
+
+.typing-dot {
+  animation: typing-dot 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.30s; }
+
+/* ── Chat bubble tails ─────────────────────────────────── */
+.bubble-jigyansa::before {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background: oklch(var(--jigyansa-bubble));
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.bubble-user::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  background: oklch(var(--user-bubble));
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+.chat-scroll::-webkit-scrollbar { width: 4px; }
+.chat-scroll::-webkit-scrollbar-track { background: transparent; }
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: oklch(var(--border));
+  border-radius: 99px;
+}
+
+/* ── Onboarding mesh background ────────────────────────── */
+.onboarding-bg {
+  background:
+    radial-gradient(ellipse at 20% 20%, oklch(0.88 0.12 20 / 0.45) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 10%, oklch(0.90 0.10 40 / 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 60% 80%, oklch(0.85 0.14 10 / 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse at 10% 70%, oklch(0.92 0.08 50 / 0.40) 0%, transparent 50%),
+    oklch(var(--background));
+}
+
+/* ── Input focus ring ──────────────────────────────────── */
+.input-jigyansa:focus-visible {
+  outline: 2px solid oklch(var(--primary));
+  outline-offset: 2px;
+}
